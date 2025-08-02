@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AgroSmart - Expo Técnica 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header, nav, section {
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav button, .lang-btn, .export-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #0044cc;
+      color: white;
+    }
+    nav button:hover, .lang-btn:hover, .export-btn:hover {
+      background-color: #00cc66;
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    form {
+      margin-top: 10px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    .export-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: #1e1e1e;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="titulo">AgroSmart - Expo Técnica 2025</h1>
+    <p id="descripcion">Fundada en 2025 con el propósito de presentar soluciones tecnológicas en la Feria Expo Técnica del Colegio Técnico Profesional de Santa Ana.</p>
+    <div>
+      <label for="idioma">🌍 Idioma / Language:</label>
+      <select id="idioma" class="lang-btn" onchange="cambiarIdioma()">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+      </select>
+    </div>
+  </header>
+
+  <nav>
+    <button onclick="mostrarSeccion('inicio')" id="navInicio">Inicio</button>
+    <button onclick="mostrarSeccion('calendario')" id="navCalendario">Calendario Lunar</button>
+    <button onclick="mostrarSeccion('inventario')" id="navInventario">Inventario</button>
+    <button onclick="mostrarSeccion('siembra')" id="navSiembra">Fechas de Siembra</button>
+    <button onclick="mostrarSeccion('cosechas')" id="navCosechas">Registro de Cosechas</button>
+  </nav>
+
+  <section id="inicio" class="active">
+    <h2 id="bienvenida">Bienvenido</h2>
+    <p id="textoInicio">Esta plataforma fue creada para mostrar innovación agrícola. Permite organizar cultivos, consultar fases lunares, registrar siembras y cosechas y exportar registros.</p>
+  </section>
+
+  <section id="calendario">
+    <h2 id="tituloCalendario">Calendario Lunar</h2>
+    <iframe src="https://www.moongiant.com/phase/today/"></iframe>
+  </section>
+
+  <section id="inventario">
+    <h2 id="tituloInventario">Inventario</h2>
+    <form onsubmit="guardarRegistro(event, 'listaInventario', 'nombreCultivo', 'cantidad')">
+      <input type="text" id="nombreCultivo" placeholder="Nombre del cultivo" required>
+      <input type="number" id="cantidad" placeholder="Cantidad" required>
+      <button type="submit">Guardar</button>
+    </form>
+    <ul id="listaInventario"></ul>
+    <div class="export-group">
+      <button class="export-btn" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="export-btn" onclick="exportarComoPDF('listaInventario')">📄 Exportar PDF</button>
+      <button class="export-btn" onclick="exportarComoExcel('listaInventario')">📊 Exportar Excel</button>
+      <button class="export-btn" onclick="exportarComoPNG('listaInventario')">🖼️ Exportar PNG</button>
+    </div>
+  </section>
+
+  <section id="siembra">
+    <h2 id="tituloSiembra">Fechas de Siembra</h2>
+<ul id="listaSiembra">
+  <!-- Frutas -->
+  <li>🍎 Manzana - Invierno - Rica en fibra y antioxidantes</li>
+  <li>🍌 Banano - Todo el año - Rico en potasio</li>
+  <li>🍇 Uvas - Primavera - Buenas para el corazón</li>
+  <li>🍊 Naranja - Invierno - Alta en vitamina C</li>
+  <li>🍉 Sandía - Verano - Hidratante</li>
+  <li>🍓 Fresa - Primavera - Antioxidante</li>
+  <li>🥭 Mango - Verano - Rico en vitamina A</li>
+  <li>🍍 Piña - Verano - Antiinflamatorio natural</li>
+  <li>🍑 Durazno - Primavera - Mejora la piel</li>
+  <li>🥝 Kiwi - Otoño - Ayuda a la digestión</li>
+  <li>🍋 Limón - Todo el año - Refuerza el sistema inmune</li>
+  <li>🍐 Pera - Otoño - Rica en fibra</li>
+  <li>🫐 Arándano - Primavera - Prevención del envejecimiento</li>
+  <li>🍒 Cereza - Primavera - Antiinflamatoria</li>
+  <li>🍈 Melón - Verano - Hidratante y digestivo</li>
+  <li>🥥 Coco - Verano - Hidratación natural</li>
+  <li>🍅 Tomate - Verano - Rico en licopeno</li>
+  <li>🍏 Manzana verde - Invierno - Menor azúcar</li>
+  <li>🍊 Mandarina - Invierno - Digestiva</li>
+  <li>🍇 Uva negra - Primavera - Antioxidante</li>
+
+  <!-- Verduras -->
+  <li>🥦 Brócoli - Invierno - Previene enfermedades</li>
+  <li>🥬 Lechuga - Primavera - Ligera y diurética</li>
+  <li>🥕 Zanahoria - Primavera - Mejora la visión</li>
+  <li>🧄 Ajo - Todo el año - Refuerza defensas</li>
+  <li>🧅 Cebolla - Primavera - Diurética</li>
+  <li>🥒 Pepino - Verano - Hidratante</li>
+  <li>🌽 Maíz - Verano - Fuente de energía</li>
+  <li>🥔 Papa - Otoño - Rica en carbohidratos</li>
+  <li>🥑 Aguacate - Verano - Grasas saludables</li>
+  <li>🍠 Camote - Invierno - Antioxidante</li>
+  <li>🌶️ Chile - Verano - Estimulante metabólico</li>
+  <li>🍆 Berenjena - Primavera - Controla colesterol</li>
+  <li>🥗 Repollo - Invierno - Bueno para el estómago</li>
+  <li>🥬 Acelga - Primavera - Rica en hierro</li>
+  <li>🥒 Calabacín - Verano - Rico en agua</li>
+  <li>🍄 Champiñón - Todo el año - Fuente de proteínas vegetales</li>
+  <li>🌰 Nabo - Invierno - Antiinflamatorio</li>
+  <li>🥜 Cacahuate - Verano - Proteína vegetal</li>
+  <li>🥕 Chirivía - Invierno - Fuente de fibra</li>
+  <li>🥬 Endibia - Invierno - Digestiva</li>
+
+  <!-- Legumbres -->
+  <li>🥫 Frijol - Verano - Fuente de proteínas</li>
+  <li>🌰 Garbanzo - Primavera - Rico en hierro</li>
+  <li>🌱 Lenteja - Invierno - Alto contenido proteico</li>
+  <li>🫘 Haba - Primavera - Energética</li>
+  <li>🌿 Soya - Verano - Ideal para vegetarianos</li>
+  <li>🫘 Alubia - Primavera - Rica en fibra</li>
+  <li>🥫 Frijol negro - Verano - Rico en antioxidantes</li>
+  <li>🌰 Cacahuate - Verano - Buenas grasas</li>
+  <li>🥜 Arveja - Primavera - Fibra vegetal</li>
+  <li>🌱 Lupino - Invierno - Reduce colesterol</li>
+  <li>🫘 Frijol rojo - Verano - Minerales esenciales</li>
+  <li>🌱 Lentejón - Otoño - Sustituto de proteína animal</li>
+  <li>🌿 Guandú - Primavera - Rico en potasio</li>
+  <li>🥫 Frijol mungo - Verano - Bajo en grasa</li>
+  <li>🫘 Judía verde - Primavera - Ligera y nutritiva</li>
+  <li>🌰 Almendra verde - Verano - Grasas saludables</li>
+  <li>🌿 Alfalfa - Primavera - Energizante</li>
+  <li>🌱 Vicia - Invierno - Buena para el suelo</li>
+  <li>🫘 Lenteja roja - Primavera - Fácil digestión</li>
+  <li>🌰 Chía - Todo el año - Omega 3 vegetal</li>
+
+  <!-- Pastos -->
+  <li>🌾 Pasto Elefante - Todo el año - Forraje animal</li>
+  <li>🌿 Rye grass - Invierno - Rápido crecimiento</li>
+  <li>🌾 Pasto Estrella - Verano - Cobertura de suelo</li>
+  <li>🌿 Alfalfa - Primavera - Forraje nutritivo</li>
+  <li>🌾 Bermuda grass - Verano - Resistente a sequía</li>
+  <li>🌿 Kikuyo - Verano - Pasto de altura</li>
+  <li>🌾 Brachiaria - Todo el año - Ganadería</li>
+  <li>🌿 Pennisetum - Primavera - Rápido rebrote</li>
+  <li>🌾 Festuca - Invierno - Climas fríos</li>
+  <li>🌿 Trébol - Primavera - Mejora el suelo</li>
+  <li>🌾 Dactylis - Otoño - Alta producción</li>
+  <li>🌿 Ryegrass perenne - Primavera - Estable</li>
+  <li>🌾 Bahiagrass - Verano - Poca demanda hídrica</li>
+  <li>🌿 Timothy - Verano - Ganado lechero</li>
+  <li>🌾 Pasto Jaragua - Invierno - Pastoreo</li>
+  <li>🌿 Sudan grass - Verano - Corte y acarreo</li>
+  <li>🌾 Pasto Guinea - Primavera - Alto rendimiento</li>
+  <li>🌿 Grama dulce - Verano - Clima tropical</li>
+  <li>🌾 Pasto Buffel - Verano - Tolera suelos áridos</li>
+  <li>🌿 Leucaena - Todo el año - Forrajera y abono verde</li>
+
+  <!-- Hortalizas -->
+  <li>🥬 Lechuga romana - Primavera - Digestiva</li>
+  <li>🥦 Coliflor - Invierno - Rica en antioxidantes</li>
+  <li>🥕 Apio - Primavera - Diurético natural</li>
+  <li>🥬 Espinaca - Otoño - Buena para los huesos</li>
+  <li>🥦 Repollo morado - Invierno - Rico en vitamina K</li>
+  <li>🥬 Mostaza verde - Primavera - Picante saludable</li>
+  <li>🥕 Rábano - Primavera - Estimulante digestivo</li>
+  <li>🥬 Berro - Primavera - Rico en hierro</li>
+  <li>🥦 Kale - Invierno - Súper alimento</li>
+  <li>🥬 Acelga roja - Otoño - Vitamina A y C</li>
+  <li>🥕 Hinojo - Primavera - Alivia digestión</li>
+  <li>🥬 Escarola - Otoño - Estimula apetito</li>
+  <li>🥦 Brócoli chino - Verano - Bajo en calorías</li>
+  <li>🥬 Diente de león - Primavera - Limpia hígado</li>
+  <li>🥕 Nabicol - Invierno - Nutrición básica</li>
+  <li>🥬 Perejil - Todo el año - Refrescante</li>
+  <li>🥦 Pak choi - Verano - Climas templados</li>
+  <li>🥬 Achicoria - Invierno - Fibra dietética</li>
+  <li>🥦 Col rizada - Primavera - Refuerza defensas</li>
+  <li>🥕 Raíz de perejil - Otoño - Sabor intenso</li>
+</ul>
+    </ul>
+    <div class="export-group">
+      <button class="export-btn" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="export-btn" onclick="exportarComoPDF('listaSiembra')">📄 Exportar PDF</button>
+      <button class="export-btn" onclick="exportarComoExcel('listaSiembra')">📊 Exportar Excel</button>
+      <button class="export-btn" onclick="exportarComoPNG('listaSiembra')">🖼️ Exportar PNG</button>
+    </div>
+  </section>
+
+  <section id="cosechas">
+    <h2 id="tituloCosechas">Registro de Cosechas</h2>
+    <form onsubmit="guardarRegistro(event, 'listaCosechas', 'cultivo', 'cantidadCosechada', 'fecha')">
+      <input type="text" id="cultivo" placeholder="Cultivo cosechado" required>
+      <input type="number" id="cantidadCosechada" placeholder="Cantidad" required>
+      <input type="date" id="fecha" required>
+      <button type="submit">Registrar</button>
+    </form>
+    <ul id="listaCosechas"></ul>
+    <div class="export-group">
+      <button class="export-btn" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="export-btn" onclick="exportarComoPDF('listaCosechas')">📄 Exportar PDF</button>
+      <button class="export-btn" onclick="exportarComoExcel('listaCosechas')">📊 Exportar Excel</button>
+      <button class="export-btn" onclick="exportarComoPNG('listaCosechas')">🖼️ Exportar PNG</button>
+    </div>
+  </section>
+
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function guardarRegistro(e, ulId, input1, input2, dateId = null) {
+      e.preventDefault();
+      const val1 = document.getElementById(input1).value;
+      const val2 = document.getElementById(input2).value;
+      const date = dateId ? document.getElementById(dateId).value : new Date().toLocaleString();
+      const texto = `${date} - ${val1}: ${val2} unidades`;
+      const li = document.createElement('li');
+      li.textContent = texto;
+      document.getElementById(ulId).appendChild(li);
+      e.target.reset();
+    }
+
+    function exportarComoPDF(id) {
+      alert('Exportar a PDF aún no implementado en esta vista previa.');
+    }
+
+    function exportarComoExcel(id) {
+      alert('Exportar a Excel aún no implementado en esta vista previa.');
+    }
+
+    function exportarComoPNG(id) {
+      alert('Exportar a PNG aún no implementado en esta vista previa.');
+    }
+
+    // Se agregará también lógica para cambio de idioma completo
+
+  </script>
+</body>
+</html>
